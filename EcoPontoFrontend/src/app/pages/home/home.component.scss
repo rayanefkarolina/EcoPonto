@@ -19,6 +19,11 @@
     color: var(--primary-green);
   }
 
+  .logo-img {
+    height: 44px;
+    display: block;
+  }
+
   .nav-links {
     display: flex;
     gap: 1.5rem;
@@ -160,8 +165,13 @@
     }
 
     .icon-container {
-      font-size: 2.5rem;
       margin-bottom: 1rem;
+    }
+
+    .icon-container img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
     }
 
     h3 {

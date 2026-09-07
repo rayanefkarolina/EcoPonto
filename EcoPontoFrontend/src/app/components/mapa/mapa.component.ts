@@ -7,9 +7,10 @@ import { Icon, marker, Marker } from 'leaflet';
 const defaultIcon = Icon.Default.prototype;
 // no-op: we'll set icon options in ngAfterViewInit
 import * as L from 'leaflet';
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+// Use asset URLs for marker images instead of importing binaries
+const markerIcon2x = '/images/marker-icon-2x.png';
+const markerIcon = '/images/marker-icon.png';
+const markerShadow = '/images/marker-shadow.png';
 
 @Component({
   selector: 'app-mapa',

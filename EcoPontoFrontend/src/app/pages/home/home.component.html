@@ -2,8 +2,7 @@
   <!-- 1. BARRA DE NAVEGAÇÃO -->
   <header class="navbar">
     <div class="logo">
-      <span class="logo-icon">🌿</span>
-      <span class="logo-text">Eco<strong>Ponto</strong></span>
+      <img src="/images/logo.png" alt="EcoPonto" class="logo-img" />
     </div>
 
     <nav class="nav-links">
@@ -43,8 +42,7 @@
     </div>
 
     <div class="hero-illustration">
-      <!-- Salve a ilustração em src/assets/images/hero-recycle.png ou .svg -->
-      <img src="assets/images/hero-recycle.png" alt="Ilustração de reciclagem comunitária" />
+      <img src="/images/hero-recycle.png" alt="Ilustração de reciclagem comunitária" />
     </div>
   </main>
 
@@ -55,7 +53,9 @@
     <div class="categories-grid">
       <!-- Card 1 -->
       <article class="category-card">
-        <div class="icon-container">🍾</div>
+        <div class="icon-container">
+          <img src="/images/cat-oleo.png" alt="Óleo" />
+        </div>
         <h3>ÓLEO DE COZINHA USADO</h3>
         <p>Transforme óleo usado em biodiesel e sabão.</p>
         <button (click)="irParaMapa('oleo')" class="btn-card">Encontrar Ponto</button>
@@ -63,7 +63,9 @@
 
       <!-- Card 2 -->
       <article class="category-card">
-        <div class="icon-container">🔋</div>
+        <div class="icon-container">
+          <img src="/images/cat-pilhas.png" alt="Pilhas e Baterias" />
+        </div>
         <h3>PILHAS E BATERIAS</h3>
         <p>Descarte pilhas gastas com segurança química.</p>
         <button (click)="irParaMapa('pilhas')" class="btn-card">Pontos de Coleta</button>
@@ -71,7 +73,9 @@
 
       <!-- Card 3 -->
       <article class="category-card">
-        <div class="icon-container">💻</div>
+        <div class="icon-container">
+          <img src="/images/cat-eletronicos.png" alt="Eletrônicos" />
+        </div>
         <h3>ELETRÔNICOS</h3>
         <p>Recicle aparelhos, fios e cabos antigos.</p>
         <button (click)="irParaMapa('eletronicos')" class="btn-card">Onde Descartar</button>
@@ -79,7 +83,9 @@
 
       <!-- Card 4 -->
       <article class="category-card">
-        <div class="icon-container">📦</div>
+        <div class="icon-container">
+          <img src="/images/cat-reciclaveis.png" alt="Recicláveis" />
+        </div>
         <h3>RECICLÁVEIS COMUNS</h3>
         <p>Para papel, papelão, plástico, vidro e metal.</p>
         <button (click)="irParaMapa('reciclaveis')" class="btn-card">Ponto de Entrega</button>
