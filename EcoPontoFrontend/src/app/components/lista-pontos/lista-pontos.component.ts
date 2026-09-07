@@ -1,8 +1,6 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PontosService } from '../../services/pontos.service';
-import { GeolocationService } from '../../services/geolocation.service';
 import { PontoColeta } from '../../models/ponto-coleta.model';
 import { Categoria } from '../../models/categoria.model';
 
@@ -13,36 +11,29 @@ import { Categoria } from '../../models/categoria.model';
   templateUrl: './lista-pontos.component.html',
   styleUrls: ['./lista-pontos.component.scss']
 })
-export class ListaPontosComponent implements OnInit {
-  pontos = signal<PontoColeta[]>([]);
-  categorias = signal<Categoria[]>([]);
+export class ListaPontosComponent implements OnInit, OnChanges {
+  @Input() pontos: PontoColeta[] = [];
+  @Input() categorias: Categoria[] = [];
+  @Input() userPos: { latitude: number; longitude: number } | null = null;
+  @Output() select = new EventEmitter<PontoColeta>();
+
+  pontosSignal = signal<PontoColeta[]>([]);
   busca = signal('');
   categoriaAtiva = signal<number | null>(null);
-  userPos: { latitude: number; longitude: number } | null = null;
 
-  constructor(private pontosService: PontosService, private geolocation: GeolocationService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.loadCategorias();
-    this.geolocation.getCurrentPosition().subscribe(pos => {
-      this.userPos = pos;
-      this.loadPontos();
-    });
+    this.pontosSignal.set(this.pontos);
   }
 
-  loadCategorias() {
-    this.pontosService.getCategorias().subscribe(c => this.categorias.set(c));
-  }
-
-  loadPontos() {
-    const categoriaId = this.categoriaAtiva();
-    const busca = this.busca();
-    this.pontosService.getPontos(categoriaId ?? undefined, busca ?? undefined).subscribe(p => this.pontos.set(p));
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['pontos']) this.pontosSignal.set(this.pontos);
   }
 
   setCategoria(id: number | null) {
     this.categoriaAtiva.set(id);
-    this.loadPontos();
+    // parent component should apply filtering and pass updated pontos
   }
 
   distancia(p: PontoColeta) {
@@ -62,4 +53,6 @@ export class ListaPontosComponent implements OnInit {
     if (!p?.categorias) return '';
     return p.categorias.map(c => c.nome).filter(Boolean).join(', ');
   }
+
+  onCardClick(p: PontoColeta) { this.select.emit(p); }
 }

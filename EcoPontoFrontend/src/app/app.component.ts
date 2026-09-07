@@ -1,16 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MapaComponent } from './components/mapa/mapa.component';
-import { ListaPontosComponent } from './components/lista-pontos/lista-pontos.component';
-import { GuiaDescarteComponent } from './components/guia-descarte/guia-descarte.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, MapaComponent, ListaPontosComponent, GuiaDescarteComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  imports: [RouterOutlet],
+  template: '<router-outlet></router-outlet>'
 })
-export class AppComponent {
-  title = 'EcoPonto Local';
-}
+export class AppComponent {}

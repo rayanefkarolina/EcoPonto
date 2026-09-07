@@ -1,0 +1,89 @@
+<div class="landing-page">
+  <!-- 1. BARRA DE NAVEGAÇÃO -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🌿</span>
+      <span class="logo-text">Eco<strong>Ponto</strong></span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#">Início</a>
+      <a href="#">Como Funciona</a>
+      <a routerLink="/mapa">Mapa</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#">Sobre Nós</a>
+    </nav>
+
+    <div class="nav-search">
+      <input type="text" placeholder="Buscar..." aria-label="Buscar" />
+    </div>
+  </header>
+
+  <!-- 2. HERO SECTION -->
+  <main class="hero-container">
+    <div class="hero-content">
+      <h1>LOCALIZAR ECOPONTO<br>MAIS PRÓXIMO</h1>
+      <p>
+        Encontre o ponto de descarte de recicláveis mais próximo de você e 
+        contribua para um mundo mais sustentável.
+      </p>
+
+      <form class="search-box" (submit)="onSubmit($event)">
+        <input 
+          type="text" 
+          placeholder="Digite seu CEP ou endereço" 
+          [(ngModel)]="enderecoOuCep" 
+          name="busca"
+          required 
+        />
+        <button type="submit" class="btn-primary">
+          <span class="icon">📍</span> Encontrar agora
+        </button>
+      </form>
+    </div>
+
+    <div class="hero-illustration">
+      <!-- Salve a ilustração em src/assets/images/hero-recycle.png ou .svg -->
+      <img src="assets/images/hero-recycle.png" alt="Ilustração de reciclagem comunitária" />
+    </div>
+  </main>
+
+  <!-- 3. CARDS DE CATEGORIAS RÁPIDAS -->
+  <section class="categories-section" id="categorias">
+    <h2>Categorias de Descarte Rápido</h2>
+
+    <div class="categories-grid">
+      <!-- Card 1 -->
+      <article class="category-card">
+        <div class="icon-container">🍾</div>
+        <h3>ÓLEO DE COZINHA USADO</h3>
+        <p>Transforme óleo usado em biodiesel e sabão.</p>
+        <button (click)="irParaMapa('oleo')" class="btn-card">Encontrar Ponto</button>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="category-card">
+        <div class="icon-container">🔋</div>
+        <h3>PILHAS E BATERIAS</h3>
+        <p>Descarte pilhas gastas com segurança química.</p>
+        <button (click)="irParaMapa('pilhas')" class="btn-card">Pontos de Coleta</button>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="category-card">
+        <div class="icon-container">💻</div>
+        <h3>ELETRÔNICOS</h3>
+        <p>Recicle aparelhos, fios e cabos antigos.</p>
+        <button (click)="irParaMapa('eletronicos')" class="btn-card">Onde Descartar</button>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="category-card">
+        <div class="icon-container">📦</div>
+        <h3>RECICLÁVEIS COMUNS</h3>
+        <p>Para papel, papelão, plástico, vidro e metal.</p>
+        <button (click)="irParaMapa('reciclaveis')" class="btn-card">Ponto de Entrega</button>
+      </article>
+    </div>
+  </section>
+</div>

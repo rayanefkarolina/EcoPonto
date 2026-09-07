@@ -1,0 +1,20 @@
+<div class="map-shell">
+  <div class="controls">
+    <input #q placeholder="Buscar por CEP ou endereço" (keyup.enter)="loadPontos(undefined, q.value)" />
+    <div class="chips">
+      <button *ngFor="let c of categorias" (click)="loadPontos(c.id)" class="chip">{{c.nome}}</button>
+    </div>
+  </div>
+
+  <app-mapa [pontos]="pontos" (selected)="onSelect($event)"></app-mapa>
+
+  <app-lista-pontos [pontos]="pontos" [categorias]="categorias" [userPos]="userPos" (select)="onSelect($event)"></app-lista-pontos>
+
+  <aside class="detail" *ngIf="selected">
+    <h3>{{selected.nome}}</h3>
+    <div>{{selected.logradouro}} — {{selected.bairro}}</div>
+    <div class="dist">Distância: <!-- placeholder, calculate in child or here --> </div>
+    <div class="tags">{{ getCategoriasNames(selected) }}</div>
+    <a [href]="'https://www.google.com/maps/dir/?api=1&destination=' + selected.latitude + ',' + selected.longitude" target="_blank">Como chegar</a>
+  </aside>
+</div>

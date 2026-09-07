@@ -1,13 +1,13 @@
 <section class="filters">
-  <input type="search" placeholder="Buscar por nome/bairro" [(ngModel)]="busca" (ngModelChange)="loadPontos()" />
+  <input type="search" placeholder="Buscar por nome/bairro" [(ngModel)]="busca" />
   <div class="categories">
     <button (click)="setCategoria(null)" [class.active]="categoriaAtiva()===null">Todos</button>
-    <button *ngFor="let c of categorias()" (click)="setCategoria(c.id)" [class.active]="categoriaAtiva()===c.id">{{c.nome}}</button>
+    <button *ngFor="let c of categorias" (click)="setCategoria(c.id)" [class.active]="categoriaAtiva()===c.id">{{c.nome}}</button>
   </div>
 </section>
 
 <section class="cards">
-  <article *ngFor="let p of pontos()" class="card">
+  <article *ngFor="let p of pontosSignal()" class="card" (click)="onCardClick(p)">
     <h3>{{p.nome}}</h3>
     <div class="address">{{p.logradouro}} — {{p.bairro}}</div>
     <div class="meta">

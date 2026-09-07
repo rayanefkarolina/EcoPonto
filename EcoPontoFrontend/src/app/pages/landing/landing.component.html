@@ -1,0 +1,27 @@
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Localize o EcoPonto mais próximo</h1>
+    <p>Encontre pontos de descarte consciente de resíduos especiais e recicláveis na sua região.</p>
+
+    <div class="actions">
+      <button class="btn primary" (click)="usarMinhaLocalizacao()">Usar minha localização</button>
+      <div class="search">
+        <input placeholder="Digite seu CEP ou bairro" [(ngModel)]="cep" />
+        <button class="btn" (click)="buscar()">Encontrar agora</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="categories">
+    <h2>Categorias de descarte rápido</h2>
+    <div class="cards">
+      <div class="card" *ngFor="let c of categorias">
+        <div class="icon" aria-hidden="true">♻️</div>
+        <div class="content">
+          <h3>{{c.nome}}</h3>
+          <button class="btn small" (click)="goToCategoria(c.id)">Encontrar Ponto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
