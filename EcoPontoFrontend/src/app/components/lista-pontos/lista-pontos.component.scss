@@ -1,0 +1,8 @@
+.filters { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+.filters input { padding:8px; font-size:16px; }
+.categories { display:flex; gap:6px; flex-wrap:wrap; }
+.categories button { padding:6px 10px; border-radius:6px; border:1px solid #ccc; background:#fff; }
+.categories button.active { background:#0b5ed7; color:#fff; }
+.cards { display:flex; flex-direction:column; gap:10px; }
+.card { padding:12px; border-radius:8px; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+.meta { display:flex; justify-content:space-between; margin-top:8px; color:#666; }

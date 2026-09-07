@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="EcoPonto.API/EcoPonto.API.csproj" />
+  <Project Path="EcoPonto.Domain/EcoPonto.Domain.csproj" />
+  <Project Path="EcoPonto.Infrastructure/EcoPonto.Infrastructure.csproj" />
+  <Project Path="EcoPonto.Tests/EcoPonto.Tests.csproj" />
+</Solution>
