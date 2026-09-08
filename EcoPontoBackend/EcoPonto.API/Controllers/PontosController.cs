@@ -33,7 +33,6 @@ namespace EcoPonto.API.Controllers
             try
             {
                 var client = httpClientFactory.CreateClient("OpenStreetMap");
-                using var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("data", query) });
                 HttpResponseMessage? response = null;
                 foreach (var endpoint in new[]
                 {
@@ -43,6 +42,7 @@ namespace EcoPonto.API.Controllers
                 {
                     try
                     {
+                        using var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("data", query) });
                         response = await client.PostAsync(endpoint, content);
                         if (response.IsSuccessStatusCode) break;
                         response.Dispose();
@@ -84,6 +84,10 @@ namespace EcoPonto.API.Controllers
                 return Ok(Array.Empty<PontoColetaResponseDto>());
             }
             catch (JsonException)
+            {
+                return Ok(Array.Empty<PontoColetaResponseDto>());
+            }
+            catch (InvalidOperationException)
             {
                 return Ok(Array.Empty<PontoColetaResponseDto>());
             }

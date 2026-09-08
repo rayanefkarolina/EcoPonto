@@ -30,10 +30,18 @@ export class MainComponent implements OnInit {
     this.loadPontosFromQuery();
   }
 
-  loadCategorias() { this.pontosService.getCategorias().subscribe(c => this.categorias = c); }
+  loadCategorias() {
+    this.pontosService.getCategorias().subscribe({
+      next: categorias => this.categorias = categorias,
+      error: () => this.erroBusca = 'Não foi possível carregar as categorias. Verifique se a API está em execução.'
+    });
+  }
 
   loadPontos(categoriaId?: number, busca?: string) {
-    this.pontosService.getPontos(categoriaId, busca).subscribe(p => this.pontos = p);
+    this.pontosService.getPontos(categoriaId, busca).subscribe({
+      next: pontos => this.pontos = pontos,
+      error: () => this.erroBusca = 'Não foi possível carregar os EcoPontos. Verifique se a API está em execução.'
+    });
   }
 
   loadPontosFromQuery() {
