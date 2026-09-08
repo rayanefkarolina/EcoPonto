@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="40" height="60">
+  <!-- Sombra base -->
+  <ellipse cx="12" cy="34" rx="8" ry="2" fill="rgba(0,0,0,0.15)"/>
+  
+  <!-- Corpo principal do pino -->
+  <path d="M12 0C5.373 0 0 5.373 0 12c0 7.5 12 22 12 22s12-14.5 12-22C24 5.373 18.627 0 12 0z" fill="#1976D2"/>
+  
+  <!-- Círculo interno contrastante -->
+  <circle cx="12" cy="12" r="6" fill="#FFFFFF"/>
+  
+  <!-- Ponto central para destacar a localização atual -->
+  <circle cx="12" cy="12" r="2.5" fill="#0D47A1"/>
+</svg>

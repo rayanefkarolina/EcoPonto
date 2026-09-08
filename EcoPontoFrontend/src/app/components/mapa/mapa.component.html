@@ -1,1 +1,44 @@
-<div class="map-container" #map></div>
+<div class="map-layout">
+	<div id="mapa-interativo" #map></div>
+
+	<header class="floating-top-bar" aria-label="Busca e filtros do mapa">
+		<div class="search-container">
+			<span class="label">CEP: 14160-000</span>
+			<input #buscaInput type="text" placeholder="Buscar EcoPonto por CEP..." (keyup.enter)="buscar(buscaInput.value)" />
+			<button class="btn-search" type="button" aria-label="Buscar" (click)="buscar(buscaInput.value)">🔍</button>
+		</div>
+		<p class="search-error" *ngIf="erroBusca || mensagemBusca" role="alert">
+			{{ erroBusca || mensagemBusca }}
+		</p>
+
+		<div class="filter-chips" aria-label="Filtrar por material">
+			<button type="button" class="chip" [class.active]="filtroAtivo === 'todos'" (click)="filtrar('todos')">Todos</button>
+			<button type="button" class="chip" [class.active]="filtroAtivo === 'oleo'" (click)="filtrar('oleo')">Óleo de Cozinha</button>
+			<button type="button" class="chip" [class.active]="filtroAtivo === 'eletronicos'" (click)="filtrar('eletronicos')">Eletrônicos</button>
+			<button type="button" class="chip" [class.active]="filtroAtivo === 'pilhas'" (click)="filtrar('pilhas')">Pilhas e Baterias</button>
+		</div>
+	</header>
+
+	<aside class="floating-sidebar" *ngIf="pontoSelecionado">
+		<div class="details-card">
+			<button class="btn-close" type="button" aria-label="Fechar detalhes" (click)="fecharCard()">✕</button>
+			<img src="/images/logo.png" alt="EcoPonto" class="card-img" />
+
+			<h3>{{ pontoSelecionado.nome }}</h3>
+			<p class="address">📍 {{ pontoSelecionado.logradouro }}, {{ pontoSelecionado.bairro }}</p>
+			<p class="status open">🕒 {{ pontoSelecionado.horarioFuncionamento || 'Horário não informado' }}</p>
+
+			<div class="materials">
+				<h4>Materiais Aceitos</h4>
+				<div class="tags">
+					<span class="tag" *ngFor="let categoria of pontoSelecionado.categorias">{{ categoria.nome }}</span>
+				</div>
+			</div>
+
+			<div class="actions">
+				<a class="btn-primary" [href]="rotaPara(pontoSelecionado)" target="_blank" rel="noopener">Como Chegar</a>
+				<button class="btn-secondary" type="button" (click)="fecharCard()">Fechar</button>
+			</div>
+		</div>
+	</aside>
+</div>

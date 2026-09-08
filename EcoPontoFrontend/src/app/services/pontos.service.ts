@@ -17,6 +17,14 @@ export class PontosService {
     return this.http.get<PontoColeta[]>(`${this.base}/pontos`, { params });
   }
 
+  getPontosProximos(latitude: number, longitude: number): Observable<PontoColeta[]> {
+    const params = new HttpParams()
+      .set('latitude', latitude)
+      .set('longitude', longitude)
+      .set('raioKm', 50);
+    return this.http.get<PontoColeta[]>(`${this.base}/pontos/proximos`, { params });
+  }
+
   getCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(`${this.base}/categorias`);
   }

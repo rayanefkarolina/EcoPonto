@@ -114,5 +114,6 @@ namespace EcoPonto.Infrastructure
             context.Pontos.AddRange(ponto1, ponto2, ponto3, ponto4);
             context.SaveChanges();
         }
+
     }
 }

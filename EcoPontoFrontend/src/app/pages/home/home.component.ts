@@ -17,9 +17,11 @@ export class HomeComponent {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    if (this.enderecoOuCep.trim()) {
+    const busca = this.enderecoOuCep.trim();
+    if (busca) {
+      const cep = busca.replace(/\D/g, '');
       this.router.navigate(['/mapa'], { 
-        queryParams: { busca: this.enderecoOuCep } 
+        queryParams: cep.length === 8 ? { cep } : { busca }
       });
     }
   }
