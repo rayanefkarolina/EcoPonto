@@ -11,10 +11,12 @@ namespace EcoPonto.API.Controllers
     public class PontosController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly ILogger<PontosController> _logger;
 
-        public PontosController(AppDbContext context)
+        public PontosController(AppDbContext context, ILogger<PontosController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         [HttpGet("proximos")]
@@ -28,68 +30,125 @@ namespace EcoPonto.API.Controllers
                 return BadRequest("Coordenadas inválidas.");
 
             var raioMetros = Math.Clamp(raioKm, 1, 50) * 1000;
+            raioKm = raioMetros / 1000;
             var query = $"[out:json][timeout:12];(nwr[\"amenity\"=\"recycling\"](around:{raioMetros},{latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)});nwr[\"recycling_type\"=\"centre\"](around:{raioMetros},{latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}););out center tags;";
 
-            try
-            {
-                var client = httpClientFactory.CreateClient("OpenStreetMap");
-                HttpResponseMessage? response = null;
-                foreach (var endpoint in new[]
+            var latitudeRange = raioKm / 110.574;
+            var longitudeRange = Math.Min(180, raioKm / (111.320 * Math.Max(Math.Cos(latitude * Math.PI / 180), 0.01)));
+            var pontosSalvos = await _context.Pontos
+                .AsNoTracking()
+                .Include(ponto => ponto.Categorias)
+                .Where(ponto =>
+                    ponto.Latitude >= Math.Max(-90, latitude - latitudeRange)
+                    && ponto.Latitude <= Math.Min(90, latitude + latitudeRange)
+                    && ponto.Longitude >= Math.Max(-180, longitude - longitudeRange)
+                    && ponto.Longitude <= Math.Min(180, longitude + longitudeRange))
+                .ToListAsync();
+            var pontosLocais = pontosSalvos
+                .Where(ponto => DistanciaEmKm(latitude, longitude, ponto.Latitude, ponto.Longitude) <= raioKm)
+                .Select(ponto => new PontoColetaResponseDto
                 {
-                    "https://overpass-api.de/api/interpreter",
-                    "https://overpass.kumi.systems/api/interpreter"
+                    Id = ponto.Id,
+                    Nome = ponto.Nome,
+                    Logradouro = ponto.Logradouro,
+                    Bairro = ponto.Bairro,
+                    Cidade = ponto.Cidade,
+                    Telefone = ponto.Telefone,
+                    HorarioFuncionamento = ponto.HorarioFuncionamento,
+                    Latitude = ponto.Latitude,
+                    Longitude = ponto.Longitude,
+                    Categorias = ponto.Categorias.Select(categoria => new CategoriaDto
+                    {
+                        Id = categoria.Id,
+                        Nome = categoria.Nome,
+                        Icone = categoria.Icone,
+                        OrientacaoDescarte = categoria.OrientacaoDescarte
+                    }).ToList()
                 })
+                .ToList();
+
+            var client = httpClientFactory.CreateClient("OpenStreetMap");
+            HttpResponseMessage? response = null;
+            var failures = new List<string>();
+            foreach (var endpoint in new[]
+            {
+                "https://overpass.osm.ch/api/interpreter",
+                "https://overpass-api.de/api/interpreter",
+                "https://overpass.kumi.systems/api/interpreter"
+            })
+            {
+                try
                 {
-                    try
-                    {
-                        using var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("data", query) });
-                        response = await client.PostAsync(endpoint, content);
-                        if (response.IsSuccessStatusCode) break;
-                        response.Dispose();
-                        response = null;
-                    }
-                    catch (HttpRequestException)
-                    {
-                        response?.Dispose();
-                        response = null;
-                    }
-                    catch (TaskCanceledException)
-                    {
-                        response?.Dispose();
-                        response = null;
-                    }
-                }
+                    using var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("data", query) });
+                    using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(8));
+                    response = await client.PostAsync(endpoint, content, timeout.Token);
+                    if (response.IsSuccessStatusCode) break;
 
-                if (response == null) return Ok(Array.Empty<PontoColetaResponseDto>());
-                using (response)
+                    failures.Add($"{endpoint}: HTTP {(int)response.StatusCode}");
+                    _logger.LogWarning("Overpass endpoint {Endpoint} returned HTTP {StatusCode}.", endpoint, (int)response.StatusCode);
+                    response.Dispose();
+                    response = null;
+                }
+                catch (HttpRequestException exception)
                 {
-                using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-
-                var pontos = document.RootElement.GetProperty("elements")
-                    .EnumerateArray()
-                    .Select((element, index) => ToOpenStreetMapPoint(element, index))
-                    .Where(point => point != null)
-                    .Select(point => point!)
-                    .ToList();
-
-                return Ok(pontos);
+                    failures.Add($"{endpoint}: {exception.Message}");
+                    _logger.LogWarning(exception, "Could not reach Overpass endpoint {Endpoint}.", endpoint);
+                    response?.Dispose();
+                    response = null;
+                }
+                catch (TaskCanceledException exception)
+                {
+                    failures.Add($"{endpoint}: request timed out");
+                    _logger.LogWarning(exception, "Overpass endpoint {Endpoint} timed out.", endpoint);
+                    response?.Dispose();
+                    response = null;
                 }
             }
-            catch (HttpRequestException)
+
+            if (response == null)
             {
-                return Ok(Array.Empty<PontoColetaResponseDto>());
+                _logger.LogError("All Overpass endpoints failed: {Failures}", string.Join("; ", failures));
+                if (pontosLocais.Count > 0) return Ok(pontosLocais);
+                return StatusCode(StatusCodes.Status503ServiceUnavailable, "O serviço de busca de pontos está indisponível no momento.");
             }
-            catch (TaskCanceledException)
+
+            using (response)
             {
-                return Ok(Array.Empty<PontoColetaResponseDto>());
-            }
-            catch (JsonException)
-            {
-                return Ok(Array.Empty<PontoColetaResponseDto>());
-            }
-            catch (InvalidOperationException)
-            {
-                return Ok(Array.Empty<PontoColetaResponseDto>());
+                try
+                {
+                    using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+
+                    var pontos = document.RootElement.GetProperty("elements")
+                        .EnumerateArray()
+                        .Select((element, index) => ToOpenStreetMapPoint(element, index))
+                        .Where(point => point != null)
+                        .Select(point => point!)
+                        .ToList();
+
+                    foreach (var pontoLocal in pontosLocais)
+                    {
+                        if (!pontos.Any(ponto => DistanciaEmKm(
+                            pontoLocal.Latitude,
+                            pontoLocal.Longitude,
+                            ponto.Latitude,
+                            ponto.Longitude) < 0.1))
+                        {
+                            pontos.Add(pontoLocal);
+                        }
+                    }
+
+                    return Ok(pontos);
+                }
+                catch (JsonException exception)
+                {
+                    _logger.LogError(exception, "Overpass returned an invalid JSON response.");
+                    return StatusCode(StatusCodes.Status502BadGateway, "O serviço de busca retornou uma resposta inválida.");
+                }
+                catch (InvalidOperationException exception)
+                {
+                    _logger.LogError(exception, "Overpass returned an unexpected response structure.");
+                    return StatusCode(StatusCodes.Status502BadGateway, "O serviço de busca retornou uma resposta inválida.");
+                }
             }
         }
 
@@ -130,6 +189,18 @@ namespace EcoPonto.API.Controllers
             return tags.ValueKind == JsonValueKind.Object && tags.TryGetProperty(name, out var value)
                 ? value.GetString()
                 : null;
+        }
+
+        private static double DistanciaEmKm(double latitudeOrigem, double longitudeOrigem, double latitudeDestino, double longitudeDestino)
+        {
+            var latitudeOrigemRad = latitudeOrigem * Math.PI / 180;
+            var latitudeDestinoRad = latitudeDestino * Math.PI / 180;
+            var deltaLatitude = latitudeDestinoRad - latitudeOrigemRad;
+            var deltaLongitude = (longitudeDestino - longitudeOrigem) * Math.PI / 180;
+            var a = Math.Sin(deltaLatitude / 2) * Math.Sin(deltaLatitude / 2)
+                + Math.Cos(latitudeOrigemRad) * Math.Cos(latitudeDestinoRad)
+                * Math.Sin(deltaLongitude / 2) * Math.Sin(deltaLongitude / 2);
+            return 6371 * 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
         }
 
         [HttpGet]

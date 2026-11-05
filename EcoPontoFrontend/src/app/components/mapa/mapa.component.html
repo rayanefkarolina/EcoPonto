@@ -11,8 +11,9 @@
 			{{ erroBusca || mensagemBusca }}
 		</p>
 
-		<div class="filter-chips" aria-label="Filtrar por material">
+		<div class="filter-chips" aria-label="Filtrar EcoPontos">
 			<button type="button" class="chip" [class.active]="filtroAtivo === 'todos'" (click)="filtrar('todos')">Todos</button>
+			<button type="button" class="chip" [class.active]="filtroAtivo === 'reciclagem'" (click)="filtrar('reciclagem')">Centros de Reciclagem</button>
 			<button type="button" class="chip" [class.active]="filtroAtivo === 'oleo'" (click)="filtrar('oleo')">Óleo de Cozinha</button>
 			<button type="button" class="chip" [class.active]="filtroAtivo === 'eletronicos'" (click)="filtrar('eletronicos')">Eletrônicos</button>
 			<button type="button" class="chip" [class.active]="filtroAtivo === 'pilhas'" (click)="filtrar('pilhas')">Pilhas e Baterias</button>

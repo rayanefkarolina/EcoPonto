@@ -1,0 +1,648 @@
+{
+  "source": "Prefeitura de S?o Paulo - Ecopontos do Munic?pio de S?o Paulo",
+  "sourceUrl": "https://dados.prefeitura.sp.gov.br/dataset/ecopontos",
+  "license": "CC0",
+  "sourceUpdated": "2019-02-20",
+  "locations": [
+    {
+      "name": "Bresser",
+      "address": "Pca. Giuseppe Cesari 54",
+      "observation": "Baixo do Viad. Bresser",
+      "subprefecture": "Mooca - MO",
+      "latitude": -23.544132,
+      "longitude": -46.605404
+    },
+    {
+      "name": "Pinheiros",
+      "address": "Pca. do Cancioneiro 15",
+      "observation": "Baixo do Viad. Eng. Ary Torres",
+      "subprefecture": "Pinheiros - PI",
+      "latitude": -23.597326,
+      "longitude": -46.691085
+    },
+    {
+      "name": "Tatuape",
+      "address": "Av. Salim Farah Maluf 179",
+      "observation": "",
+      "subprefecture": "Mooca - MO",
+      "latitude": -23.531681,
+      "longitude": -46.583526
+    },
+    {
+      "name": "Imperador",
+      "address": "Avenida Ribeirao Jacu 201",
+      "observation": "Baixo do Viad. Jacu Pessego",
+      "subprefecture": "SÃ£o Miguel - MP",
+      "latitude": -23.51537,
+      "longitude": -46.454953
+    },
+    {
+      "name": "Conego Jose Salomon",
+      "address": "Rua Conego Jose Salomon 861",
+      "observation": "",
+      "subprefecture": "Pirituba/JaraguÃ¡ - PJ",
+      "latitude": -23.492529,
+      "longitude": -46.721124
+    },
+    {
+      "name": "Cupece",
+      "address": "Rua Analia Maria de Jesus 130",
+      "observation": "Av. Cupece",
+      "subprefecture": "Cidade Ademar - AD",
+      "latitude": -23.666137,
+      "longitude": -46.654715
+    },
+    {
+      "name": "Vigario Godoi",
+      "address": "Rua Vigario Godoi 480",
+      "observation": "",
+      "subprefecture": "Pirituba/JaraguÃ¡ - PJ",
+      "latitude": -23.477532,
+      "longitude": -46.718251
+    },
+    {
+      "name": "Viad. Eng. Alberto Badra",
+      "address": "Av. Aricanduva 200",
+      "observation": "Baixo do Viad. Eng. Alberto Badra",
+      "subprefecture": "Aricanduva/Formosa/CarrÃ£o - AF",
+      "latitude": -23.539141,
+      "longitude": -46.545226
+    },
+    {
+      "name": "Mirandopolis",
+      "address": "Av. Casemiro da Rocha 1220",
+      "observation": "Av. Jose Maria Whitaker",
+      "subprefecture": "Vila Mariana - VM",
+      "latitude": -23.611389,
+      "longitude": -46.644168
+    },
+    {
+      "name": "Penha I",
+      "address": "Rua Dr. Heladio 104",
+      "observation": "",
+      "subprefecture": "Penha - PE",
+      "latitude": -23.531146,
+      "longitude": -46.525271
+    },
+    {
+      "name": "Carlito Maia",
+      "address": "Rua Domingos Fernandes Nobre 109",
+      "observation": "",
+      "subprefecture": "SÃ£o Miguel - MP",
+      "latitude": -23.490681,
+      "longitude": -46.394281
+    },
+    {
+      "name": "Bandeirantes",
+      "address": "Rua Itaiquara 237",
+      "observation": "Av. Itaberaba",
+      "subprefecture": "Freguesia/BrasilÃ¢ndia - FO",
+      "latitude": -23.486342,
+      "longitude": -46.694753
+    },
+    {
+      "name": "Recanto dos Humildes",
+      "address": "Rua Sales Gomes 415",
+      "observation": "",
+      "subprefecture": "Perus - PR",
+      "latitude": -23.408835,
+      "longitude": -46.751153
+    },
+    {
+      "name": "Astarte",
+      "address": "Rua Astarte,468",
+      "observation": "",
+      "subprefecture": "Aricanduva/Formosa/CarrÃ£o - AF",
+      "latitude": -23.552494,
+      "longitude": -46.528159
+    },
+    {
+      "name": "Parque Santo Dias",
+      "address": "Travessa Rosifloras 301",
+      "observation": "",
+      "subprefecture": "Campo LImpo - CL",
+      "latitude": -23.664114,
+      "longitude": -46.775172
+    },
+    {
+      "name": "Vila Guilherme",
+      "address": "Rua Jose Bernardo Pinto 1480",
+      "observation": "",
+      "subprefecture": "Vila Maria/Vila Gulherme - MG",
+      "latitude": -23.517222,
+      "longitude": -46.600913
+    },
+    {
+      "name": "Jardim Maria do Carmo",
+      "address": "Rua Caminho do Engenho 800",
+      "observation": "",
+      "subprefecture": "ButantÃ£ - BT",
+      "latitude": -23.595568,
+      "longitude": -46.746372
+    },
+    {
+      "name": "Moreira",
+      "address": "Rua Joao Batista de Godoi 1164",
+      "observation": "",
+      "subprefecture": "Itaim Paulisa - IT",
+      "latitude": -23.497398,
+      "longitude": -46.370263
+    },
+    {
+      "name": "Jd. Sao Nicolau",
+      "address": "Rua Agreste de Itabaiana 590",
+      "observation": "Rua Eduardo Kyioshi Shimuta",
+      "subprefecture": "Ermelino Matarazzo - EM",
+      "latitude": -23.522765,
+      "longitude": -46.482466
+    },
+    {
+      "name": "Alceu Maynard de Araujo",
+      "address": "Av. Prof. Alceu Maynard de Araujo 330",
+      "observation": "",
+      "subprefecture": "Santo Amaro - SA",
+      "latitude": -23.635136,
+      "longitude": -46.710499
+    },
+    {
+      "name": "Nascer do Sol",
+      "address": "Rua Nascer do Sol 356",
+      "observation": "",
+      "subprefecture": "Cidade Tiradentes - CT",
+      "latitude": -23.59002,
+      "longitude": -46.410661
+    },
+    {
+      "name": "Parque Fernanda",
+      "address": "Av. Dr. Salvador Rocco 400",
+      "observation": "Rua Antonio Canon",
+      "subprefecture": "Campo LImpo - CL",
+      "latitude": -23.671371,
+      "longitude": -46.793458
+    },
+    {
+      "name": "Alvarenga",
+      "address": "Estrada do Alvarenga 2475",
+      "observation": "",
+      "subprefecture": "Cidade Ademar - AD",
+      "latitude": -23.695653,
+      "longitude": -46.650919
+    },
+    {
+      "name": "Cipoaba",
+      "address": "Rua Padre Luis de Siqueira",
+      "observation": "Av. Rodolfo Pirani",
+      "subprefecture": "SÃ£o Mateus - SM",
+      "latitude": -23.629183,
+      "longitude": -46.462358
+    },
+    {
+      "name": "Anhaia Mello",
+      "address": "Rua da Prece 296",
+      "observation": "Av. Prof. Luis Ignacio de Anhaia Melo",
+      "subprefecture": "Vila Prudente - VP",
+      "latitude": -23.582531,
+      "longitude": -46.571064
+    },
+    {
+      "name": "Sao Lucas",
+      "address": "Rua Florencio Sanches 307",
+      "observation": "",
+      "subprefecture": "Vila Prudente - VP",
+      "latitude": -23.599069,
+      "longitude": -46.534435
+    },
+    {
+      "name": "Tereza Cristina",
+      "address": "Avenida Tereza Cristina 10",
+      "observation": "Av. do Estado",
+      "subprefecture": "Ipiranga - IP",
+      "latitude": -23.568137,
+      "longitude": -46.60911
+    },
+    {
+      "name": "Sapopemba",
+      "address": "Rua Francesco Usper 550",
+      "observation": "",
+      "subprefecture": "Vila Prudente - VP",
+      "latitude": -23.606783,
+      "longitude": -46.497171
+    },
+    {
+      "name": "Parque Peruche",
+      "address": "Av. Eng. Caetano Alvares 3142",
+      "observation": "",
+      "subprefecture": "Casa Verde - CV",
+      "latitude": -23.491925,
+      "longitude": -46.656688
+    },
+    {
+      "name": "Parque Guarani",
+      "address": "Rua Manuel Alves da Rocha 584",
+      "observation": "",
+      "subprefecture": "Itaquera - IQ",
+      "latitude": -23.520481,
+      "longitude": -46.463542
+    },
+    {
+      "name": "Glicerio",
+      "address": "Baixos do Viaduto Glicerio",
+      "observation": "",
+      "subprefecture": "SÃ© - SE",
+      "latitude": -23.556108,
+      "longitude": -46.629317
+    },
+    {
+      "name": "Santa Cruz",
+      "address": "Rua Santa Cruz",
+      "observation": "",
+      "subprefecture": "Ipiranga - IP",
+      "latitude": -23.600769,
+      "longitude": -46.622053
+    },
+    {
+      "name": "Vila Madalena",
+      "address": "Rua Girassol 15",
+      "observation": "Rua Luis Murat",
+      "subprefecture": "Pinheiros - PI",
+      "latitude": -23.558238,
+      "longitude": -46.687184
+    },
+    {
+      "name": "Pedro Nunes",
+      "address": "Rua da Polka 100",
+      "observation": "",
+      "subprefecture": "SÃ£o Miguel - MP",
+      "latitude": -23.506188,
+      "longitude": -46.461861
+    },
+    {
+      "name": "Jardim Sao Paulo",
+      "address": "Rua Utaro Kanai",
+      "observation": "ao lado do Posto de Saude",
+      "subprefecture": "Guaianazes - G",
+      "latitude": -23.565492,
+      "longitude": -46.399164
+    },
+    {
+      "name": "Vila Nova Cachoeirinha",
+      "address": "Rua Felix Alves Pereira 113",
+      "observation": "",
+      "subprefecture": "Casa Verde - CV",
+      "latitude": -23.472591,
+      "longitude": -46.669574
+    },
+    {
+      "name": "Vila Santa Maria",
+      "address": "Rua Andre Bolsena",
+      "observation": "Travessa Luis Sa",
+      "subprefecture": "Casa Verde - CV",
+      "latitude": -23.493668,
+      "longitude": -46.671701
+    },
+    {
+      "name": "Casa Verde",
+      "address": "Rua Zanzibar 125",
+      "observation": "",
+      "subprefecture": "Casa Verde - CV",
+      "latitude": -23.514173,
+      "longitude": -46.654783
+    },
+    {
+      "name": "Tiquatira",
+      "address": "Rua Amorim Diniz",
+      "observation": "Av. Gov. Carvalho Pinto",
+      "subprefecture": "Penha - PE",
+      "latitude": -23.513643,
+      "longitude": -46.544422
+    },
+    {
+      "name": "Vila Cardoso Franco",
+      "address": "Rua dos Voras 25",
+      "observation": "",
+      "subprefecture": "Vila Prudente - VP",
+      "latitude": -23.623218,
+      "longitude": -46.508859
+    },
+    {
+      "name": "Vicente Rao",
+      "address": "Av. Vicente Rao 308",
+      "observation": "Baixo do Viad. Ver. Jose Diniz",
+      "subprefecture": "Santo Amaro - SA",
+      "latitude": -23.626956,
+      "longitude": -46.686447
+    },
+    {
+      "name": "Agua Espraiada",
+      "address": "Baixo Viad. Austregesilo de Athayde",
+      "observation": "Av. Ver. Jose Diniz",
+      "subprefecture": "Santo Amaro - SA",
+      "latitude": -23.621878,
+      "longitude": -46.679344
+    },
+    {
+      "name": "Liberdade",
+      "address": "Rua Jaceguai 67",
+      "observation": "Av. Liberdade",
+      "subprefecture": "SÃ© - SE",
+      "latitude": -23.555165,
+      "longitude": -46.641965
+    },
+    {
+      "name": "Armenia",
+      "address": "Rua General Carmona",
+      "observation": "",
+      "subprefecture": "SÃ© - SE",
+      "latitude": -23.521073,
+      "longitude": -46.628425
+    },
+    {
+      "name": "Barra Funda",
+      "address": "Rua Solon",
+      "observation": "Baixos Viad. Eng. Orlando Murgel",
+      "subprefecture": "SÃ© - SE",
+      "latitude": -23.5274,
+      "longitude": -46.648013
+    },
+    {
+      "name": "Gamelinha",
+      "address": "Rua Morfeu 25",
+      "observation": "",
+      "subprefecture": "Penha - PE",
+      "latitude": -23.550632,
+      "longitude": -46.494567
+    },
+    {
+      "name": "Bras",
+      "address": "Rua Palmorino Monaco",
+      "observation": "Rua da Mooca (Baixo Viad. Prof. Alberto Mesquita de Carvalho)",
+      "subprefecture": "Mooca - MO",
+      "latitude": -23.554134,
+      "longitude": -46.611007
+    },
+    {
+      "name": "Mooca",
+      "address": "Rua Pires do Rio",
+      "observation": "Rua Bresser (Baixo Viaduto Bresser)",
+      "subprefecture": "Mooca - MO",
+      "latitude": -23.547593,
+      "longitude": -46.603285
+    },
+    {
+      "name": "Cambuci",
+      "address": "Av. do Estado",
+      "observation": "Av. Dom Pedro I X Rua Ibiruba",
+      "subprefecture": "SÃ© - SE",
+      "latitude": -23.564659,
+      "longitude": -46.611088
+    },
+    {
+      "name": "Vila Sabrina",
+      "address": "Av. dos Poetas, 931",
+      "observation": "",
+      "subprefecture": "Vila Maria/Vila Guilherme - MG",
+      "latitude": -23.485521,
+      "longitude": -46.565333
+    },
+    {
+      "name": "Iguatemi",
+      "address": "Rua Francisco de Melo Palheta",
+      "observation": "R. Morro do Frade",
+      "subprefecture": "SÃ£o Mateus - SM",
+      "latitude": -23.607096,
+      "longitude": -46.451878
+    },
+    {
+      "name": "Imigrantes",
+      "address": "Rua Opixe",
+      "observation": "Rua Fedrerico Hoeme",
+      "subprefecture": "Jabaquara - JA",
+      "latitude": -23.632454,
+      "longitude": -46.630743
+    },
+    {
+      "name": "Alexios Jafet",
+      "address": "Rua Alexios Jafet 150",
+      "observation": "",
+      "subprefecture": "Pirituba/JaraguÃ¡ - PJ",
+      "latitude": -23.453445,
+      "longitude": -46.749189
+    },
+    {
+      "name": "Voith",
+      "address": "Av. Atilio Brugnoli 89",
+      "observation": "R. Friedrich Von Voith",
+      "subprefecture": "Pirituba/JaraguÃ¡ - PJ",
+      "latitude": -23.445441,
+      "longitude": -46.739118
+    },
+    {
+      "name": "Viaduto Antartica",
+      "address": "Rua Gustav Willi Borghoff",
+      "observation": "Av. Antartica ( Baixo do Viad. Antartica)",
+      "subprefecture": "Lapa - LA",
+      "latitude": -23.524713,
+      "longitude": -46.672698
+    },
+    {
+      "name": "Franquinho",
+      "address": "Rua dos Continentes",
+      "observation": "Av. Calim Eid",
+      "subprefecture": "Penha - PE",
+      "latitude": -23.532525,
+      "longitude": -46.486637
+    },
+    {
+      "name": "Vila Matilde",
+      "address": "Rua Mateus de Siqueira",
+      "observation": "Praca Leonildes Ramos Saigo",
+      "subprefecture": "Penha - PE",
+      "latitude": -23.539248,
+      "longitude": -46.504758
+    },
+    {
+      "name": "Jardim Jaqueline",
+      "address": "Rua Walter Brito Belleti",
+      "observation": "",
+      "subprefecture": "ButantÃ£ - BT",
+      "latitude": -23.58883,
+      "longitude": -46.753712
+    },
+    {
+      "name": "Belem",
+      "address": "Baixos do Viad. Guadalajara",
+      "observation": "Rua Artur Mota x Rua Herval",
+      "subprefecture": "Mooca - MO",
+      "latitude": -23.543295,
+      "longitude": -46.593803
+    },
+    {
+      "name": "Vila Maria",
+      "address": "Rua Curuca, 1.700",
+      "observation": "",
+      "subprefecture": "Vila Maria/Vila Guilherme - MG",
+      "latitude": -23.519992,
+      "longitude": -46.580682
+    },
+    {
+      "name": "Olinda",
+      "address": "Av. Padre Adolfo Kolping",
+      "observation": "Rua Nelson Brissac",
+      "subprefecture": "Campo LImpo - CL",
+      "latitude": -23.634236,
+      "longitude": -46.760094
+    },
+    {
+      "name": "Beleza",
+      "address": "Rua Campo Novo do Sul",
+      "observation": "",
+      "subprefecture": "Campo LImpo - CL",
+      "latitude": -23.637541,
+      "longitude": -46.740404
+    },
+    {
+      "name": "Alto de Pinheiros",
+      "address": "Praca Arcipreste Anselmo de Oliveira",
+      "observation": "",
+      "subprefecture": "Pinheiros - PI",
+      "latitude": -23.557282,
+      "longitude": -46.710573
+    },
+    {
+      "name": "Vila Jaguara",
+      "address": "Rua Agrestina",
+      "observation": "Av. Marginal Direita do Tiete",
+      "subprefecture": "Lapa - LA",
+      "latitude": -23.515413,
+      "longitude": -46.741058
+    },
+    {
+      "name": "Oswaldo Valle Cordeiro",
+      "address": "Av. Osvaldo Valle Cordeiro 420",
+      "observation": "",
+      "subprefecture": "Itaquera - IQ",
+      "latitude": -23.557592,
+      "longitude": -46.491493
+    },
+    {
+      "name": "Jardim Santa Fe",
+      "address": "Rua Salvador Albano",
+      "observation": "R. Virginia Castiglione",
+      "subprefecture": "Perus - PR",
+      "latitude": -23.434019,
+      "longitude": -46.792334
+    },
+    {
+      "name": "Politecnica",
+      "address": "Praca Nilton Vieira de Almeida",
+      "observation": "R. Lucas de Leyde, 347",
+      "subprefecture": "ButantÃ£ - BT",
+      "latitude": -23.576376,
+      "longitude": -46.764105
+    },
+    {
+      "name": "Giovani Gronchi",
+      "address": "Av. Giovani Gronchi,3413",
+      "observation": "Rua Jose Dias da Costa",
+      "subprefecture": "ButantÃ£ - BT",
+      "latitude": -23.609556,
+      "longitude": -46.726533
+    },
+    {
+      "name": "Freguesia de O",
+      "address": "Rua Placido Pereira",
+      "observation": "Rua Souza Filho",
+      "subprefecture": "Freguesia/BrasilÃ¢ndia - FO",
+      "latitude": -23.503154,
+      "longitude": -46.704419
+    },
+    {
+      "name": "Agua Rasa",
+      "address": "Av. Salim Farah Maluf,1500",
+      "observation": "",
+      "subprefecture": "Mooca - MO",
+      "latitude": -23.556477,
+      "longitude": -46.577295
+    },
+    {
+      "name": "Vila Luisa",
+      "address": "Rua Recife",
+      "observation": "R. Alfredo de Franco - Baixo Viad. Eng. Alberto Brada",
+      "subprefecture": "Mooca - MO",
+      "latitude": -23.528873,
+      "longitude": -46.550366
+    },
+    {
+      "name": "Itaqueruna",
+      "address": "Rua Domitila D'Abril",
+      "observation": "Av. Nordestina",
+      "subprefecture": "SÃ£o Miguel - MP",
+      "latitude": -23.509234,
+      "longitude": -46.433024
+    },
+    {
+      "name": "Tucuruvi",
+      "address": "Rua Eduardo Vicente Nasser 519",
+      "observation": "",
+      "subprefecture": "Santana/Tucuruvi - ST",
+      "latitude": -23.466397,
+      "longitude": -46.609741
+    },
+    {
+      "name": "CANGAIBA",
+      "address": "Rua Dr. Luciano Nogueira",
+      "observation": "Rua Frei Ricardo Pilar",
+      "subprefecture": "Penha - PE",
+      "latitude": -23.503566477567624,
+      "longitude": -46.526815711315955
+    },
+    {
+      "name": "Nova York",
+      "address": "Rua Amelia Vanso Magnoli",
+      "observation": "Entre Ruas  Olivia Trindade e",
+      "subprefecture": "Aricanduva/Formosa/CarrÃ£o - AF",
+      "latitude": -23.58749044718752,
+      "longitude": -46.50900219866798
+    },
+    {
+      "name": "Guaiaponto",
+      "address": "Rua da passagem funda,250",
+      "observation": "",
+      "subprefecture": "Guaianazes - G",
+      "latitude": -23.563196878858214,
+      "longitude": -46.417072831356066
+    },
+    {
+      "name": "Jabaquara",
+      "address": "Rua Genaro de Carvalho",
+      "observation": "Rua Jupatis",
+      "subprefecture": "Jabaquara - JA",
+      "latitude": -23.652983368867712,
+      "longitude": -46.64979875114627
+    },
+    {
+      "name": "VIla Rica",
+      "address": "Rua Jorge Mamede da silva,201",
+      "observation": "",
+      "subprefecture": "Freguesia/BrasilÃ¢ndia - FO",
+      "latitude": -23.47019306122009,
+      "longitude": -46.674255507056884
+    },
+    {
+      "name": "Santana",
+      "address": "Av. Zaki Narchi, 360",
+      "observation": "AACD",
+      "subprefecture": "Santana/Tucuruvi - ST",
+      "latitude": -23.511568583226115,
+      "longitude": -46.62185704909001
+    },
+    {
+      "name": "Cidade SaudÃ¡vel",
+      "address": "Rua Ptolomeo",
+      "observation": "",
+      "subprefecture": "Capela do Socorro - CS",
+      "latitude": -23.667792080759114,
+      "longitude": -46.7167589904453
+    }
+  ]
+}

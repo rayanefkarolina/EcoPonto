@@ -27,6 +27,7 @@ export class MapaComponent implements AfterViewInit, OnDestroy, OnChanges {
 
   private map?: L.Map;
   private userMarker?: Marker;
+  private userPosition?: [number, number];
   private cepMarker?: Marker;
   private pontoMarkers?: L.LayerGroup;
 
@@ -61,16 +62,11 @@ export class MapaComponent implements AfterViewInit, OnDestroy, OnChanges {
     this.pontoMarkers.addTo(this.map);
 
     this.geolocation.getCurrentPosition().subscribe(pos => {
+      this.userPosition = [pos.latitude, pos.longitude];
       if (!this.mapCenter) {
         this.map?.setView([pos.latitude, pos.longitude], 14);
       }
-      if (this.userMarker) this.userMarker.setLatLng([pos.latitude, pos.longitude]);
-      else {
-        this.userMarker = marker([pos.latitude, pos.longitude], {
-          title: 'Você',
-          icon: this.iconeUsuario
-        }).addTo(this.map!);
-      }
+      this.atualizarMarcadorUsuario();
     });
 
     this.renderPontos();
@@ -85,6 +81,7 @@ export class MapaComponent implements AfterViewInit, OnDestroy, OnChanges {
     if (changes['mapCenter'] && this.mapCenter) {
       this.map?.setView(this.mapCenter, 14);
       this.atualizarMarcadorCep(this.mapCenter);
+      this.atualizarMarcadorUsuario();
       this.renderPontos();
     }
   }
@@ -92,10 +89,18 @@ export class MapaComponent implements AfterViewInit, OnDestroy, OnChanges {
   private renderPontos() {
     if (!this.map || !this.pontoMarkers) return;
     this.pontoMarkers.clearLayers();
-    const pontosVisiveis = this.pontosFiltrados();
-    if (this.mapCenter && pontosVisiveis.length === 0) {
+    const pontosNaRegiao = this.pontosProximos();
+    const pontosVisiveis = this.aplicarFiltro(pontosNaRegiao);
+    if (pontosVisiveis.length > 0) {
+      this.mensagemBusca = '';
+    } else if (this.mapCenter && pontosNaRegiao.length === 0) {
       this.mensagemBusca = 'Nenhum EcoPonto foi encontrado próximo a este CEP.';
+    } else if (this.filtroAtivo !== 'todos') {
+      this.mensagemBusca = 'Nenhum EcoPonto corresponde ao filtro selecionado.';
+    } else {
+      this.mensagemBusca = '';
     }
+
     for (const p of pontosVisiveis) {
       const m = marker([p.latitude, p.longitude], { icon: this.iconeEcoPonto }).bindPopup(this.popupHtml(p));
       m.on('click', () => {
@@ -130,6 +135,7 @@ export class MapaComponent implements AfterViewInit, OnDestroy, OnChanges {
           this.mapCenter = center;
           this.map?.setView(center, 14);
           this.atualizarMarcadorCep(center);
+          this.atualizarMarcadorUsuario();
           this.pontosService.getPontosProximos(center[0], center[1]).subscribe({
             next: pontos => {
               this.pontos = pontos;
@@ -185,19 +191,49 @@ export class MapaComponent implements AfterViewInit, OnDestroy, OnChanges {
     }).bindPopup('Localização pesquisada').addTo(this.map);
   }
 
+  private atualizarMarcadorUsuario(): void {
+    if (!this.map) return;
+
+    if (this.mapCenter || !this.userPosition) {
+      this.userMarker?.remove();
+      this.userMarker = undefined;
+      return;
+    }
+
+    if (this.userMarker) {
+      this.userMarker.setLatLng(this.userPosition).addTo(this.map);
+      return;
+    }
+
+    this.userMarker = marker(this.userPosition, {
+      title: 'Você',
+      icon: this.iconeUsuario
+    }).addTo(this.map);
+  }
+
   rotaPara(ponto: PontoColeta): string {
     return `https://www.google.com/maps/dir/?api=1&destination=${ponto.latitude},${ponto.longitude}`;
   }
 
-  private pontosFiltrados(): PontoColeta[] {
-    let pontos = this.pontos;
+  private pontosProximos(): PontoColeta[] {
     if (this.mapCenter) {
-      pontos = pontos.filter(ponto => this.distanciaEmKm(this.mapCenter!, [ponto.latitude, ponto.longitude]) <= 50);
+      return this.pontos.filter(ponto =>
+        this.distanciaEmKm(this.mapCenter!, [ponto.latitude, ponto.longitude]) <= 50
+      );
     }
+
+    return this.pontos;
+  }
+
+  private aplicarFiltro(pontos: PontoColeta[]): PontoColeta[] {
     if (this.filtroAtivo === 'todos') return pontos;
     return pontos.filter(ponto => ponto.categorias.some(categoria =>
-      categoria.nome.toLocaleLowerCase().includes(this.filtroAtivo)
+      this.normalizarTexto(categoria.nome).includes(this.filtroAtivo)
     ));
+  }
+
+  private normalizarTexto(valor: string): string {
+    return valor.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
   }
 
   private distanciaEmKm(origem: [number, number], destino: [number, number]): number {
