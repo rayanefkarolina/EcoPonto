@@ -39,7 +39,10 @@ export class MainComponent implements OnInit {
 
   loadPontos(categoriaId?: number, busca?: string) {
     this.pontosService.getPontos(categoriaId, busca).subscribe({
-      next: pontos => this.pontos = pontos,
+      next: pontos => {
+        this.pontos = pontos;
+        this.erroBusca = '';
+      },
       error: () => this.erroBusca = 'Não foi possível carregar os EcoPontos. Verifique se a API está em execução.'
     });
   }
@@ -62,7 +65,10 @@ export class MainComponent implements OnInit {
           next: center => {
             this.mapCenter = center;
             this.pontosService.getPontosProximos(center[0], center[1]).subscribe({
-              next: pontos => this.pontos = pontos,
+              next: pontos => {
+                this.pontos = pontos;
+                this.erroBusca = '';
+              },
               error: () => this.erroBusca = 'Não foi possível carregar os EcoPontos desta região.'
             });
           },
@@ -102,6 +108,11 @@ export class MainComponent implements OnInit {
   }
 
   onSelect(p: PontoColeta) { this.selected = p; }
+
+  onPontosCarregados(pontos: PontoColeta[]): void {
+    this.pontos = pontos;
+    this.erroBusca = '';
+  }
 
   getCategoriasNames(p: PontoColeta) {
     if (!p || !p.categorias) return '';

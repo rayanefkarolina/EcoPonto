@@ -142,11 +142,13 @@ namespace EcoPonto.API.Controllers
                 catch (JsonException exception)
                 {
                     _logger.LogError(exception, "Overpass returned an invalid JSON response.");
+                    if (pontosLocais.Count > 0) return Ok(pontosLocais);
                     return StatusCode(StatusCodes.Status502BadGateway, "O serviço de busca retornou uma resposta inválida.");
                 }
                 catch (InvalidOperationException exception)
                 {
                     _logger.LogError(exception, "Overpass returned an unexpected response structure.");
+                    if (pontosLocais.Count > 0) return Ok(pontosLocais);
                     return StatusCode(StatusCodes.Status502BadGateway, "O serviço de busca retornou uma resposta inválida.");
                 }
             }

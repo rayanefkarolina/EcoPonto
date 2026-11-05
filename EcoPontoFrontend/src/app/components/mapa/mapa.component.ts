@@ -20,6 +20,7 @@ export class MapaComponent implements AfterViewInit, OnDestroy, OnChanges {
   @Input() mapCenter: [number, number] | null = null;
   @Input() erroBusca = '';
   @Output() selected = new EventEmitter<PontoColeta>();
+  @Output() pontosCarregados = new EventEmitter<PontoColeta[]>();
 
   pontoSelecionado: PontoColeta | null = null;
   filtroAtivo = 'todos';
@@ -139,6 +140,7 @@ export class MapaComponent implements AfterViewInit, OnDestroy, OnChanges {
           this.pontosService.getPontosProximos(center[0], center[1]).subscribe({
             next: pontos => {
               this.pontos = pontos;
+              this.pontosCarregados.emit(pontos);
               this.mensagemBusca = pontos.length === 0
                 ? 'Nenhum EcoPonto foi encontrado próximo a este CEP.'
                 : '';

@@ -1,3 +1,3 @@
 <div class="map-shell">
-  <app-mapa [pontos]="pontos" [mapCenter]="mapCenter" [erroBusca]="erroBusca" (selected)="onSelect($event)"></app-mapa>
+  <app-mapa [pontos]="pontos" [mapCenter]="mapCenter" [erroBusca]="erroBusca" (pontosCarregados)="onPontosCarregados($event)" (selected)="onSelect($event)"></app-mapa>
 </div>
