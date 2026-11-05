@@ -3,10 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PontoColeta } from '../models/ponto-coleta.model';
 import { Categoria } from '../models/categoria.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class PontosService {
-  private base = '/api';
+  private base = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

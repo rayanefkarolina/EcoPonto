@@ -12,7 +12,14 @@ builder.Services.AddHttpClient("OpenStreetMap", client =>
     client.Timeout = TimeSpan.FromSeconds(30);
 });
 
-builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+if (allowedOrigins.Length == 0)
+{
+    throw new InvalidOperationException("Configure at least one origin in Cors:AllowedOrigins.");
+}
+
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod()));
 
 // Configure DbContext: read connection string or fallback to sqlite
 var configuration = builder.Configuration;
@@ -46,7 +53,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 
