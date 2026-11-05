@@ -1,4 +1,5 @@
 using EcoPonto.Infrastructure;
+using EcoPonto.API.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,12 +26,18 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 var configuration = builder.Configuration;
 var conn = configuration.GetConnectionString("DefaultConnection") ?? Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
 
-if (!string.IsNullOrWhiteSpace(conn) && (conn.Contains("Host=") || conn.Contains("Postgres") || conn.Contains("postgres")))
+if (!string.IsNullOrWhiteSpace(conn) && DatabaseConnectionString.IsPostgres(conn))
 {
-    builder.Services.AddDbContext<AppDbContext>(opts => opts.UseNpgsql(conn));
+    var postgresConnectionString = DatabaseConnectionString.NormalizePostgres(conn);
+    builder.Services.AddDbContext<AppDbContext>(opts => opts.UseNpgsql(postgresConnectionString));
 }
 else
 {
+    if (!builder.Environment.IsDevelopment())
+    {
+        throw new InvalidOperationException("Configure ConnectionStrings__DefaultConnection with the Render PostgreSQL Internal Database URL.");
+    }
+
     // fallback to sqlite local file
     var sqliteConn = conn ?? "Data Source=ecoponto.db";
     builder.Services.AddDbContext<AppDbContext>(opts => opts.UseSqlite(sqliteConn));
