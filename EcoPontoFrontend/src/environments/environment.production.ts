@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://SEU-SERVICO.onrender.com/api'
+  apiUrl: 'https://ecoponto-l246.onrender.com/api'
 };
